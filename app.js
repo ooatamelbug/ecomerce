@@ -4,7 +4,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 // require cors 
 const cors = require('cors');
-
+// require connectDB
+const connectDB = require('./databases');
 
 
 // create app from express
@@ -20,6 +21,8 @@ app.use(express.urlencoded({
 // allow app to use cors headers
 app.use(cors());
 
+// build db 
+connectDB.sync();
 
 
 // error handle
