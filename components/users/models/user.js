@@ -36,7 +36,7 @@ User.init({
     }
 },{
     timestamps: true,
-    connectDB,
+    sequelize: connectDB,
     modelName: 'User'
 });
 

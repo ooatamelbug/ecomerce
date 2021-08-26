@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 // require connectDB
 const connectDB = require('./databases');
-const { DATE } = require('sequelize/types');
 
 // create app from express
 const app = express();
@@ -22,7 +21,7 @@ app.use(express.urlencoded({
 app.use(cors());
 
 // build db 
-connectDB.sync();
+connectDB.sync({alter: true});
 
 // pass app to docs
 require('./docs')(app);
@@ -30,28 +29,8 @@ require('./docs')(app);
 // pass app to router
 require('./shared/router')(app);
 
-
 // error handle
-app.use((error, req, res, next) => {
-    // get data , message ,  status from error
-    const { errors, message, status } = error;
-    // create validationData variable for error data
-    let validationData;
-    // check if  errors is null or not
-    if(errors){
-        // loop of errors array to change format of error data
-        errors.forEach(error => {
-            validationData[error.param] = error.msg;
-        });
-    }
-    // send status to app
-    return res.status(status).json({
-        message,
-        time: new Date().now(),
-        path: req.originUrl,
-        validationData
-    });
-})
+app.use(require('./utils/errors'));
 
 
 // exports module app

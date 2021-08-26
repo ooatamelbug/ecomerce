@@ -4,12 +4,14 @@
   "description": "node js app",
   "main": "index.js",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "config": "^3.3.6",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-validator": "^6.12.1",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
     "pg": "^8.7.1",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.6.5",
@@ -24,7 +26,7 @@
     "supertest": "^6.1.6"
   },
   "scripts": {
-    "test": "",
+    "test": "jest --watch",
     "start": "nodemon www/index.js"
   },
   "repository": {
@@ -39,18 +41,23 @@
   "homepage": "https://github.com/ooatamelbug/ecomerce#readme",
   "eslintConfig": {
     "parserOptions": {
-      "ecmaVersion": "latest"
+      "ecmaVersion": 6
     },
+    "extends": [
+      "eslint:recommended",
+      "plugin:prettier/recommended"
+    ],
     "plugins": [
       "prettier"
     ],
-    "ecmaFeatures": {},
     "env": {
       "node": true,
-      "es6": true
+      "es6": true,
+      "jest": true
     },
     "rules": {
-      "semi": "warn"
+      "semi": "warn",
+      "quotes": ["warn", "single"]
     }
   },
   "prettier": {

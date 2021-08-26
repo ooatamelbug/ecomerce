@@ -7,6 +7,7 @@ const app = require('../app');
 
 // create swaggerDefinition props
 const swaggerDefinition = {
+    openapi: "3.0.0",
     components: {},
     info: {
         title: 'ecomerce api app', 
@@ -20,7 +21,7 @@ const swaggerDefinition = {
 // create options for swaggerDefinition and apis od where file of docs
 const options = {
     swaggerDefinition,
-    apis: ['../components/**/*.yaml']
+    apis: ['./components/**/docs/*.yaml']
 };
 
 // create spec with SwaggerJSDOC options

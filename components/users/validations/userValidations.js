@@ -45,8 +45,22 @@ const regiterUser = [
         . matches('[0-9]+[a-z]+[A-Z]+[.]+{8}$')
 ];
 
+// validation of loginUser route
+const loginUser = [
+    body('username')
+        .trim().escape(),
+    body('email')
+        .trim().escape(),
+    body('password')
+        .trim().escape()
+        .notEmpty().withMessage('password IS not allow to be Empty !')
+        .bail()
+        . matches('^[0-9-a-z-A-Z-.]+{8,25}$')
+
+];
 
 // exports validations of user
 module.exports = {
-    regiterUser
+    regiterUser,
+    loginUser
 };
